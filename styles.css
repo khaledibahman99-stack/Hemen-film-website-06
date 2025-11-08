@@ -1,0 +1,665 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bg-color: #0f0f0f;
+  --text-color: #f8f8f8;
+  --accent-color: #0b7561; /* ← رنگ جدید: سبز-آبی عمیق */
+  --header-bg: rgba(15, 15, 15, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--accent-color);
+}
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.header.scrolled {
+  background: rgba(15, 15, 15, 0.95);
+  border-bottom: 1px solid var(--border-color);
+}
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.logo-section a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.logo-img {
+  height: 48px;
+  width: auto;
+  filter: invert(1);
+}
+.logo-text {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.nav-desktop {
+  display: flex;
+  gap: 2rem;
+}
+.nav-desktop a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+}
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+.nav-desktop a.active,
+.nav-mobile a.active {
+  color: var(--accent-color);
+}
+.nav-desktop a.active::after {
+  width: 100%;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.language-switcher {
+  display: flex;
+  gap: 0.5rem;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.lang-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+.lang-btn.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--bg-color);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background: var(--text-color);
+  transition: all 0.3s ease;
+}
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.nav-mobile.active {
+  max-height: 400px;
+}
+.nav-mobile a {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+  display: block;
+}
+.nav-mobile a:hover {
+  background: rgba(11, 117, 97, 0.1); /* #0b7561 با شفافیت */
+}
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(15, 15, 15, 0.2), rgba(15, 15, 15, 0.8));
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+.hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: rgba(248, 248, 248, 0.9);
+}
+.hero-award {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.hero-festival {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: rgba(248, 248, 248, 0.8);
+}
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 0.9rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+.btn-primary:hover {
+  background: #095a4b; /* تیره‌تر برای hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(11, 117, 97, 0.4);
+}
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+}
+.btn-secondary:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+/* Page Content */
+.page-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  min-height: 100vh;
+}
+.page-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--accent-color);
+}
+/* Films Page */
+.film-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.film-section:last-child {
+  border-bottom: none;
+}
+.film-poster {
+  position: relative;
+}
+.film-poster img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.film-poster img:hover {
+  transform: scale(1.02);
+}
+.film-details h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+}
+.film-logline {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+.film-meta {
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+.film-crew h3,
+.film-teasers h3,
+.film-gallery h3 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  color: var(--accent-color);
+}
+.film-crew ul {
+  list-style: none;
+  line-height: 2;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.gallery-grid img:hover {
+  transform: scale(1.03);
+}
+.film-awards {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+/* About Page */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+.about-portrait img {
+  width: 100%;
+  max-height: 500px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.about-text h2 {
+  font-size: 2rem;
+  margin: 2.5rem 0 1.5rem;
+  color: var(--accent-color);
+}
+.about-text h2:first-child {
+  margin-top: 0;
+}
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.artistic-statement p {
+  margin-bottom: 1.5rem;
+}
+/* Awards Page */
+.awards-hero {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+.awards-hero img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.image-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(248, 248, 248, 0.7);
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+.awards-section {
+  margin-bottom: 5rem;
+}
+.awards-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  text-align: center;
+}
+.awards-grid {
+  display: grid;
+  gap: 2rem;
+}
+.awards-grid.three-columns {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.award-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.award-item img:hover {
+  transform: scale(1.03);
+}
+.section-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(248, 248, 248, 0.7);
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+/* Press Page */
+.press-quotes {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.press-quote {
+  border-left: 4px solid var(--accent-color);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background: rgba(11, 117, 97, 0.05);
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+.press-quote:hover {
+  background: rgba(11, 117, 97, 0.1);
+}
+.press-quote p {
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+.press-quote cite {
+  font-size: 1rem;
+  font-style: normal;
+  color: rgba(248, 248, 248, 0.8);
+  display: block;
+  margin-top: 1rem;
+}
+.press-links-section {
+  text-align: center;
+}
+.section-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+}
+.press-links {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.press-links li {
+  padding: 1rem;
+  background: rgba(11, 117, 97, 0.05);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.press-links li:hover {
+  background: rgba(11, 117, 97, 0.1);
+}
+.press-links a {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  display: block;
+}
+/* Contact Page — همترازی اصلاح شده */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+.contact-info,
+.follow-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-info h2,
+.follow-info h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  text-align: center;
+  margin-top: 0;
+}
+.contact-item,
+.social-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+.contact-item h3,
+.social-item h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+.contact-item p,
+.contact-item a,
+.social-item p,
+.social-item a {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin: 0;
+  color: var(--text-color);
+}
+.press-inquiry {
+  margin-top: 3rem;
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+.press-inquiry p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+/* Quick About — بخش «Award-Winning Filmmaker» */
+.quick-about {
+  padding: 4rem 0;
+  background-color: #121212;
+  text-align: center;
+}
+.quick-about .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.quick-about .container > div {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.quick-about h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+}
+.quick-about p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: rgba(248, 248, 248, 0.9);
+  margin-bottom: 2rem;
+}
+.quick-about .btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.quick-about .btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+/* Footer */
+.footer {
+  background: rgba(15, 15, 15, 0.95);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 2rem;
+  margin-top: 5rem;
+}
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.footer-left p {
+  margin-bottom: 0.5rem;
+  color: rgba(248, 248, 248, 0.8);
+}
+.footer-right h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+.footer-right ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+.footer-right li a {
+  font-size: 0.95rem;
+  color: rgba(248, 248, 248, 0.8);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+  .film-section,
+  .about-container,
+  .contact-container,
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  .awards-grid.three-columns {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .nav-desktop { display: none; }
+  .hamburger { display: flex; }
+  .nav-mobile { display: flex; }
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.1rem; }
+  .page-title { font-size: 2rem; }
+  .film-details h2 { font-size: 2rem; }
+  .footer-right ul {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .header-content { padding: 1rem; }
+  .logo-img { height: 40px; }
+  .logo-text { font-size: 1rem; }
+  .language-switcher { gap: 0.25rem; }
+  .lang-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+  .hero-buttons { flex-direction: column; }
+  .btn { width: 100%; }
+  .page-content { padding: 6rem 1rem 2rem; }
+}
