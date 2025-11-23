@@ -668,17 +668,16 @@ a:hover {
 /* Mobile-friendly hero buttons */
 @media (max-width: 768px) {
   .hero {
-    height: auto;
-    min-height: 100vh;
-    padding-top: 4rem;
-    box-sizing: border-box;
-  }
-
+  height: 100vh; /* ← حفظ ارتفاع کامل */
+  padding-top: 0; /* ← padding-top باعث جابجایی محتوا می‌شود */
+  box-sizing: border-box;
+}
+  
   .hero-content {
-    padding: 1.5rem;
-    padding-bottom: 4rem;
-  }
-
+  bottom: 20%; /* ← مقدار بهینه‌تر برای موبایل */
+  padding: 1.5rem;
+}
+  
   .hero-buttons {
     flex-direction: column;
     align-items: center;
@@ -699,4 +698,3 @@ a:hover {
     display: none !important;
   }
 }
-
